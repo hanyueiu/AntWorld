@@ -3,6 +3,8 @@ from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QRect, QLine, QSize, QObject
 from PyQt5.QtGui import QCursor, QPaintEvent, QColor, QPen, QPainter, QBrush, QFont, QGradient, QLinearGradient
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFrame, QSplitter, QVBoxLayout, QPushButton, QTextEdit
 
+from HWidgets.navFrame import NavWidget
+
 try:
     from Components.MoveComponent import DragWindow
 except ImportError as err:
@@ -61,10 +63,11 @@ class HMainFrame(QWidget, DragWindow):
         toolBar.setMaximumHeight(cell_height * 2)
         toolBar.setMinimumHeight(cell_height)
 
-        navBar = QFrame()
+        navBar = NavWidget()
         navBar.setFrameShape(QFrame.StyledPanel)
         navBar.setMinimumWidth(cell_width * 2)
         navBar.setMaximumWidth(cell_width * 4)
+        print(navBar.size())
 
         header = QFrame()
         header.setFrameShape(QFrame.StyledPanel)
