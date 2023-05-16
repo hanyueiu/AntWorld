@@ -11,10 +11,10 @@ class TextProgressBar(QProgressBar):
     def __init__(self, *args, **kwargs):
         super(TextProgressBar, self).__init__(*args, **kwargs)
         self.setObjectName("text_widget")
-        self.setFixedSize(200, 30)
+        self.setFixedSize(300, 60)
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setWindowIcon(QIcon(':/images/bg.png'))
+        # self.setWindowIcon(QIcon(':/images/img003.png'))
         self.setStyleSheet(Qss)
 
     def paintEvent(self, a0: QPaintEvent) -> None:

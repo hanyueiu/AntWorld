@@ -1,12 +1,12 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QProgressBar, QLabel
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QProgressBar
 from PyQt5.QtCore import QBasicTimer, Qt
 from PyQt5.QtGui import QFont
-import test002.test_qrc
-from test002.qss import Qss
-from PyQt5.QtGui import QLinearGradient
 
-from test002.text_progress_bar import TextProgressBar
+from test002.d5 import HProgressBar
+from test002.qss import Qss
+# from PyQt5.QtGui import QLinearGradient
+# from test002.text_progress_bar import TextProgressBar
 
 
 class MyClass(QWidget):
@@ -20,24 +20,9 @@ class MyClass(QWidget):
         self.resize(500, 300)
         # 载入进度条控件
         # self.pgb = QProgressBar(self)
-        self.pgb = TextProgressBar(self)
-        self.pgb.setAttribute(Qt.WA_TranslucentBackground)
-        self.pgb.setStyleSheet("background-color: rgba(255, 132, 139, 0);")
+        self.pgb = HProgressBar(self)
         self.pgb.move(50, 50)
         self.pgb.resize(250, 20)
-        self.pgb.setStyleSheet(
-            """QProgressBar {
-            border: 2px solid grey;
-            border-radius: 5px;
-            color: rgb(20,20,20);
-            background-color: #FFFFFF;
-            text-align: center;
-            }
-            QProgressBar::chunk {
-            background-color: rgb(100,200,200);
-            border-radius: 10px;
-            margin: 0.1px;
-            width: 1px;}""")
         # 其中 width 是设置进度条每一步的宽度
         # margin 设置两步之间的间隔
         # 设置字体
