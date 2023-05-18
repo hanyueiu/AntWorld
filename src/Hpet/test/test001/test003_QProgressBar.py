@@ -3,10 +3,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QProgressBar
 from PyQt5.QtCore import QBasicTimer, Qt
 from PyQt5.QtGui import QFont
 
-from test002.d5 import HProgressBar
-from test002.qss import Qss
+
 # from PyQt5.QtGui import QLinearGradient
-# from test002.text_progress_bar import TextProgressBar
 
 
 class MyClass(QWidget):
@@ -14,13 +12,11 @@ class MyClass(QWidget):
         super().__init__()
         self.initUI()
         self.setObjectName("main_widget")
-        self.setStyleSheet(Qss)
 
     def initUI(self):
         self.resize(500, 300)
         # 载入进度条控件
-        # self.pgb = QProgressBar(self)
-        self.pgb = HProgressBar(self)
+        self.pgb = QProgressBar(self)
         self.pgb.move(50, 50)
         self.pgb.resize(250, 20)
         # 其中 width 是设置进度条每一步的宽度

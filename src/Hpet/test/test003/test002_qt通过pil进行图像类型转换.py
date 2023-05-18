@@ -26,7 +26,8 @@ def qimage_to_img_by_buffer(qt_obj: QImage):
     buffer.open(QBuffer.ReadWrite)
     qt_obj.save(buffer, "PNG")
     image = Image.open(io.BytesIO(buffer.data()))
+    buffer.close()
     image.show()
 
 
-qimage_to_img_by_buffer(QImage("./img003.png"))
+qimage_to_img_by_buffer(QImage("img003.png"))

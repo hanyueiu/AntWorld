@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import re
 import time
 import concurrent.futures as future_factor
@@ -43,10 +44,21 @@ class KeySearch(object):
             file_path = path
         if not re.match(self.file_filter_regex, path):
             return path, "-1"
+        # print("1", os.stat("\\\\?\\" + path).st_size / 1024)
+        # print("2", os.path.getsize("\\\\?\\" + path) / 1024)
+        # print("3", Path("\\\\?\\" + path).stat().st_size / 1024)
+        size_10m = os.path.getsize("\\\\?\\" + path) > 1024 * 1024
         with open(file_path, "r", encoding="utf-8") as f:
-            for line_y in f.readlines():
-                if self.regex_search(line_y):
-                    file_content.append(line_y)
+            if not size_10m:
+                for line_y in f.readlines():
+                    if self.regex_search(line_y):
+                        file_content.append(line_y)
+            else:
+                line_y = f.readline()
+                while line_y:
+                    if self.regex_search(line_y):
+                        file_content.append(line_y)
+                    line_y = f.readline()
         if file_content:
             self.key_path.update({path: file_content})
         return path
@@ -72,8 +84,11 @@ class KeySearch(object):
         self.iter_root_path()
         self.get_path()
         take = time.time() - start
+        print(self.key_path)
         return f"search using {'%.02f' % take}s"
 
 
 if __name__ == '__main__':
-    print(KeySearch(r"D:\Donnie\Notes\AntNotes\PythonNotes\modules").main())
+    p = Path(r'\foo')
+    print(Path(r'\foo') / 'bar')
+    KeySearch(r"D:\Donnie\Notes\AntNotes\PythonNotes\modules").main()

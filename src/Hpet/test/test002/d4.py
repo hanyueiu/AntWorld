@@ -8,9 +8,9 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFrame, QSplitte
     QStyleOption, QStyle
 
 from HWidgets.Components.MoveComponent import DragWindow
-from test002.d3 import TMainFrame
-from test002.qss import Qss
-import test002.test_qrc
+from d3 import TMainFrame
+from qss import Qss
+import test_qrc
 
 
 class WButton(QPushButton):

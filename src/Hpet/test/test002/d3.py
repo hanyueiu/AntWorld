@@ -8,8 +8,9 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFrame, QSplitte
 from PIL import Image, ImageDraw
 from HWidgets.Components.MoveComponent import DragWindow
 
-from test002.qss import Qss
-import test002.test_qrc
+from qss import Qss
+import test_qrc
+from d2 import TMainFrame
 
 
 class FirstTimer(QWidget):
@@ -22,7 +23,7 @@ class FirstTimer(QWidget):
         self.timer.start(100, self)
         self.val = 0
         print(self.timer.isActive())
-        from test002.d3 import TMainFrame
+
         self.h_progress = TMainFrame(self)
         self.h_progress.setValue(0)
         print(self.h_progress.size())
@@ -44,6 +45,7 @@ class FirstTimer(QWidget):
             self.h_progress.update()
 
             self.label.setText("%d %%" % self.val)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

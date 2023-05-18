@@ -22,12 +22,17 @@ class HMainFrame(QWidget, DragWindow):
         self._setSize()
         self.layoutCustom()
 
+        self.setWindowFlag(Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_TranslucentBackground)
+        self.setStyleSheet("background:rgba(255, 255, 255, 100)")
+        # self.setStyleSheet("background:rgb(66, 66, 66)")
+
     def _setSize(self, size=None):
         if not size:
             desktop = QApplication.desktop()
             self.setFixedSize(int(desktop.width() * 0.6), int(desktop.height() * 0.6))
         else:
-            self.setFixedSize(size)
+            self.setFixedSize(*size)
 
     def showInfoPos(self, pos):
         print("信号检测：鼠标坐标相对于应用窗口的鼠标坐标, 桌面左上角定点的鼠标坐标", pos, QCursor.pos())
@@ -64,8 +69,8 @@ class HMainFrame(QWidget, DragWindow):
         toolBar.setMinimumHeight(cell_height)
 
         navBar = NavWidget()
-        navBar.setFrameShape(QFrame.StyledPanel)
-        navBar.setMinimumWidth(cell_width * 2)
+        # navBar.setFrameShape(QFrame.StyledPanel)
+        navBar.setMinimumWidth(cell_width * 4)
         navBar.setMaximumWidth(cell_width * 4)
         print(navBar.size())
 

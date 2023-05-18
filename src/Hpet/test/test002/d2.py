@@ -7,8 +7,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFrame, QSplitte
     QStyleOption, QStyle, QProgressBar
 from PIL import Image, ImageDraw
 from HWidgets.Components.MoveComponent import DragWindow
-from test002.qss import Qss
-import test002.test_qrc
+from qss import Qss
+import test_qrc
 from PIL import Image, ImageQt
 
 
@@ -26,7 +26,6 @@ class TMainFrame(QWidget):
         self.setStyleSheet(Qss)
         self.under_color = (0, 0, 0, 0)
         self.image_fill = ImageQt.fromqimage(QImage(":/images/img003.png"))
-        self.bacground_fill_color = (60, 120, 120, 255)
         self.progress_val = 0
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:

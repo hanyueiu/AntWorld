@@ -1,4 +1,4 @@
-import test002.test_qrc
+import test_qrc
 Qss = """
 QWidget#widget_bg{
 border-image: url(:/images/img003.png) no-repeat 0px 0px;
