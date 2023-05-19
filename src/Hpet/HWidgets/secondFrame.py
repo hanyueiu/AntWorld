@@ -109,6 +109,7 @@ class HMainFrame(QWidget, DragWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setFont(QFont('Microsoft YaHei', 15, True))
     frame = HMainFrame()
     frame.show()
     sys.exit(app.exec())
