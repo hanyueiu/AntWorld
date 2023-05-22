@@ -7,10 +7,10 @@ import importlib
 ProcessManager = importlib.import_module('ProcessManager')
 ProcessManage = ProcessManager.ProcessManage
 # from ProcessManager import ProcessManage
-# ProcessManagerModule = __import__("HWidgets.HandleFunc.ProcessManager", fromlist=['ProcessManage'])
+# ProcessManagerModule = __import__("src.HandleFunc.ProcessManager", fromlist=['ProcessManage'])
 # ProcessManagerModule = __import__("ProcessManager", fromlist=['ProcessManage'])
 
-# from HWidgets.HandleFunc.ProcessManager import ProcessManage
+# from src.HandleFunc.ProcessManager import ProcessManage
 
 
 def generate_py(qrc_file, script_file, out_file):

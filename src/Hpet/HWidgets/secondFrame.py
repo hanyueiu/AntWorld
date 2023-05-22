@@ -3,12 +3,13 @@ from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QRect, QLine, QSize, QObject
 from PyQt5.QtGui import QCursor, QPaintEvent, QColor, QPen, QPainter, QBrush, QFont, QGradient, QLinearGradient, QPixmap
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFrame, QSplitter, QVBoxLayout, QPushButton, QTextEdit
 
-from HWidgets.navFrame import NavWidget
+from src.navFrame import NavWidget
 
 try:
     from Components.MoveComponent import DragWindow
 except ImportError as err:
     from .Components.MoveComponent import DragWindow
+from Theme.style_loader import StyleLoader
 
 
 class HMainFrame(QWidget, DragWindow):
@@ -25,7 +26,7 @@ class HMainFrame(QWidget, DragWindow):
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.setStyleSheet("background:rgba(255, 255, 255, 100)")
-        # self.setStyleSheet("background:rgb(66, 66, 66)")
+        self.setStyleSheet(StyleLoader().init_style())
 
     def _setSize(self, size=None):
         if not size:
