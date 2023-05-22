@@ -14,7 +14,7 @@ class TMainFrame(QWidget, DragWindow):
     def __init__(self):
         super(TMainFrame, self).__init__()
         # YYHKey: 使用相对位置的图片展示于窗口， 任务栏
-        self.img_001 = './images/img001.png'
+        self.img_001 = './Images/img001.png'
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.setWindowIcon(QIcon(self.img_001))

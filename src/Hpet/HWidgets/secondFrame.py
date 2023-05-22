@@ -3,13 +3,14 @@ from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QRect, QLine, QSize, QObject
 from PyQt5.QtGui import QCursor, QPaintEvent, QColor, QPen, QPainter, QBrush, QFont, QGradient, QLinearGradient, QPixmap
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFrame, QSplitter, QVBoxLayout, QPushButton, QTextEdit
 
-from src.navFrame import NavWidget
+from navFrame import NavWidget
+from style_loader import StyleLoader
 
 try:
     from Components.MoveComponent import DragWindow
 except ImportError as err:
     from .Components.MoveComponent import DragWindow
-from Theme.style_loader import StyleLoader
+from frame_qss import Qss
 
 
 class HMainFrame(QWidget, DragWindow):
@@ -17,16 +18,15 @@ class HMainFrame(QWidget, DragWindow):
 
     def __init__(self):
         super(HMainFrame, self).__init__()
-        self.setWindowFlag(Qt.FramelessWindowHint)
+        self.setObjectName("SecondWidget")
         self.rightClicked[QPoint].connect(self.showInfoPos)
         self.rightClicked[QPoint, object].connect(self.showInfoPosConst)
         self._setSize()
         self.layoutCustom()
-
-        self.setWindowFlag(Qt.FramelessWindowHint)
-        self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setStyleSheet("background:rgba(255, 255, 255, 100)")
-        self.setStyleSheet(StyleLoader().init_style())
+        self.setWindowFlag(StyleLoader.FramelessWindowHint)
+        # self.setAttribute(StyleLoader.TranslucentBackground)
+        # self.setStyleSheet("background:rgba(66, 66, 66, 200)")
+        self.setStyleSheet(Qss)
 
     def _setSize(self, size=None):
         if not size:
@@ -65,7 +65,7 @@ class HMainFrame(QWidget, DragWindow):
         cell_height = self.floor(self.height() * 0.05)
         cell_width = self.floor(self.width() * 0.05)
         toolBar = QFrame()
-        toolBar.setFrameShape(QFrame.StyledPanel)  # 显示边框
+        # toolBar.setFrameShape(QFrame.StyledPanel)  # 显示边框
         toolBar.setMaximumHeight(cell_height * 2)
         toolBar.setMinimumHeight(cell_height)
 
@@ -76,7 +76,7 @@ class HMainFrame(QWidget, DragWindow):
         print(navBar.size())
 
         header = QFrame()
-        header.setFrameShape(QFrame.StyledPanel)
+        # header.setFrameShape(QFrame.StyledPanel)
         header.setMinimumHeight(cell_height)
         header.setMaximumHeight(cell_height * 3)
 
