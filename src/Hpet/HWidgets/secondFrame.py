@@ -24,7 +24,7 @@ class HMainFrame(QWidget, DragWindow):
         self._setSize()
         self.layoutCustom()
         self.setWindowFlag(StyleLoader.FramelessWindowHint)
-        # self.setAttribute(StyleLoader.TranslucentBackground)
+        self.setAttribute(StyleLoader.TranslucentBackground)
         # self.setStyleSheet("background:rgba(66, 66, 66, 200)")
         self.setStyleSheet(Qss)
 
