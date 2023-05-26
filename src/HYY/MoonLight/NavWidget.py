@@ -1,19 +1,20 @@
-from PyQt5 import QtCore
-from PyQt5.QtCore import Qt
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtCore import Qt, QEvent, QObject
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QWidget
 
 from AppStyle.StyleLoader import Loader
 from Dandelion import PushButton, VBoxLayout, Widget, ScrollArea
 from AppStyle.StyleQss import QSS, StyleQss
 
 
-class NavWidget(Widget):
+class NavWidget(QWidget):
 
     def __init__(self, parent=None):
         super(NavWidget, self).__init__(parent)
         self.topfiller = Widget()
         self.scroll = ScrollArea()
-        self.scroll.setObjectName("NavWidget")
+        self.scroll.setObjectName("nav_bar")
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidget(self.topfiller)
@@ -37,14 +38,17 @@ class NavWidget(Widget):
         Loader.spaceAttach(self.items_layout)
 
     def layout_scroll(self):
+
         item_list = ["视频", "音频", "YYH"] * 1
         self.item_height = 42
         self.item_border = 0
         self.color = QColor(121, 44, 121, 255)
+
         for filename in item_list:
             button = PushButton(self.topfiller)
             button.setObjectName("NavPushButton")
-            button.mouseMoveEvent = lambda a0: None
+            # 使用父窗口的eventFilter函数进行处理
+            button.installEventFilter(self.parent())
             button.setText(str(filename))
             button.setCheckable(True)
             button.clicked.connect(self.button_click)
@@ -52,6 +56,8 @@ class NavWidget(Widget):
 
     def button_click(self, e: QtCore.QEvent):
         source = self.sender()
+        print(source.text())
+        return
         for item_index in range(self.items_layout.count()):
             item = self.items_layout.itemAt(item_index).widget()
             if source.text() == item.text():
@@ -68,3 +74,4 @@ class NavWidget(Widget):
         # 对按钮进行尺寸修正
         for item_index in range(self.items_layout.count()):
             self.items_layout.itemAt(item_index).widget().setFixedSize(self.topfiller.width(), self.item_height)
+

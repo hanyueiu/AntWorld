@@ -2,8 +2,20 @@
 QWidget#MainFrame{
     background-color:rgba(255,255,255,255);
 }
+QWidget#title_widget {
+    background: rgba(223,223,223,255);
+}
 
-QScrollArea#NavWidget{
+QLabel#title_text {
+    padding:0px;
+    margin:0px;
+    color:rgba(63,63,63,255);
+    font-size:%(nav_font)spx;
+    font-weight: %(font_bold)s;
+    font-family:Microsoft YaHei;
+}
+
+QScrollArea#nav_bar{
     border-radius: 0px;
     border: 0px solid ;
     border-color: rgba(255,255,255,255);
@@ -17,31 +29,50 @@ QPushButton#NavPushButton{
     margin:0px;
     border:%(nav_border)spx solid rgba(150,120,100, %(transparent)s);
     color:rgba%(nav_font_color)s;
-    font-size:15px;
+    font-size:%(nav_font)spx;
     font-weight: %(font_bold)s;
     font-family:Microsoft YaHei;
 }
 QPushButton#NavPushButton:hover {
     background: rgba(240, 255, 250, %(transparent)s);
     color:rgba%(nav_font_color)s;
-    font-size:15px;
+    font-size:%(nav_font)spx;
     font-weight: %(font_bold)s;
     font-family:Microsoft YaHei;
 }
 QPushButton#NavPushButton:pressed {
     background: rgba(255, 255, 255, %(transparent)s);
     color:rgba%(nav_font_color)s;
-    font-size:18px;
+    font-size:%(nav_font)spx;
     font-weight: %(font_bold)s;
 }
+QPushButton#NavPushButton:focus {
+    background: rgba(255, 255, 255, %(transparent)s);
+    color:rgba%(nav_font_color)s;
+    font-size:%(nav_font)spx;
+    font-weight: %(font_bold)s;
+    font-family:Microsoft YaHei;
+
+}
+
+QPushButton#minimize_btn {
+    border-image: url(:/images/minimize.png) no-repeat 0px 0px;
+}
+QPushButton#close_btn {
+    border-image: url(:/images/close.png) no-repeat 0px 0px;
+}
+
 """
+from PyQt5.QtGui import QFont
+
+nav_font = 18
 
 white = (255, 255, 255)
 font_normal = 400  # 正常字体
 font_bold = 700  # 加粗字体
-moon_light_color = (250, 200, 200, 200)
+moon_light_color = (255, 255, 204, 200)
 nav_color = (230, 248, 239, 255)
-nav_font_color = moon_light_color[:-1] + (255,)
+nav_font_color = (250, 200, 200, 255)
 transparent = 255
 nav_border = 0
 
@@ -53,6 +84,7 @@ QSS = __doc__ % {
     "font_normal": font_normal,
     "moon_light_color": moon_light_color,
     "font_bold": font_bold,
+    "nav_font": nav_font,
 }
 
 """
@@ -91,6 +123,7 @@ class StyleQss(object):
                      font_normal=font_normal,
                      moon_light_color=moon_light_color,
                      font_bold=font_bold,
+                     nav_font=nav_font,
                      )
         return qss % param
 
@@ -101,3 +134,6 @@ class StyleQss(object):
 
 if __name__ == '__main__':
     StyleQss().get_qss()
+    f = QFont()
+    f.setFamily()
+

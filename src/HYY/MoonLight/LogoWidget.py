@@ -60,26 +60,20 @@ class LogoWidget(QWidget):
         super(LogoWidget, self).paintEvent(a0)
 
         painter = QPainter()
+        # 设置反锯齿
+        painter.setRenderHint(QPainter.Antialiasing, True)
         brush = QBrush()
         painter.begin(self)
         self.DrawMoon(painter, brush, self.rect())
         painter.end()
 
     def enterEvent(self, a0: QtCore.QEvent) -> None:
-        self.moon_light_color = self.moon_light_color[:-1] + (255,)
-        self.sun_light_color = self.moon_light_color[:-1] + (255,)
+        self.sun_light_color = self.bg_color[:-1] + (0,)
         self.update()
 
     def leaveEvent(self, a0: QtCore.QEvent) -> None:
-        self.moon_light_color = self.moon_light_color[:-1] + (255,)
         self.sun_light_color = self.bg_color[:-1] + (255,)
         self.update()
-
-    def mouseMoveEvent(self, e):
-        super(LogoWidget, self).mouseMoveEvent(e)
-
-    def mousePressEvent(self, e):
-        super(LogoWidget, self).mousePressEvent(e)
 
     def DrawMoon(self, painter: QPainter, brush: QBrush, area: (QRect, QRectF)):
         # 绘制区域, 起始的角度, 结束的角度

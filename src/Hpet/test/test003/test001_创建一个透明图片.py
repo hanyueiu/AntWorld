@@ -56,4 +56,20 @@ def filter_png(path):
     img_png.save(os.path.splitext(path)[0] + "_cover" + ".png", "PNG", optimize=False)
 
 
-draw_png()
+def fill_color(path, color_t):
+    img = Image.open(path)
+    img_png = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    w, h = img.size
+    for x in range(w):
+        for y in range(h):
+            color = img.getpixel((x, y))
+            if color[3] <= 1:
+                pass
+            else:
+                img_png.putpixel((x, y), color_t)
+    img_png.save(os.path.splitext(path)[0] + "_cover" + ".png")
+    # img_png.save(os.path.splitext(path)[0] + "_cover" + ".png", "PNG", optimize=False)
+
+
+# draw_png()
+fill_color("minimize.png", (66, 66, 66, 255))
