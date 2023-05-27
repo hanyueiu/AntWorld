@@ -5,7 +5,7 @@ from PyQt5.QtGui import QPainter, QBrush, QColor, QPen, QPolygon, QMouseEvent
 
 from AppStyle.StyleQss import StyleQss
 from Dandelion import PushButton, Widget, VBoxLayout
-from MoonLight.LogoWidget import LogoWidget
+from MoonLight.Logo import LogoWidget
 from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QFrame
 from Resource import resource_qrc
 
