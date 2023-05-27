@@ -11,10 +11,10 @@ from AppStyle.StyleQss import StyleQss
 from Dandelion import PushButton, Label, Pixmap
 
 
-class LogoBWidget(QWidget):
+class LogoWidgetDown(QWidget):
 
     def __init__(self, parent=None):
-        super(LogoBWidget, self).__init__(parent)
+        super(LogoWidgetDown, self).__init__(parent)
         self.label = Label(self)
         self.setObjectName("LogoBWidget")
         self.bg_color = StyleQss.nav_color
@@ -24,7 +24,7 @@ class LogoBWidget(QWidget):
         Loader.boundAttach(self)
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
-        super(LogoBWidget, self).paintEvent(a0)
+        super(LogoWidgetDown, self).paintEvent(a0)
         painter = QPainter()
         painter.begin(self)
         pixmap = Pixmap(":/images/moon.png")
@@ -38,7 +38,7 @@ class LogoBWidget(QWidget):
                                self.height() * scale
                                )
         # 整体填充背景色
-        bg_circle = LogoWidget.get_scale(self.rect(), 1.5)
+        bg_circle = LogoWidgetUp.get_scale(self.rect(), 1.5)
         painter.setBrush(QBrush(QColor(*self.bg_color)))
         painter.setPen(QColor(*self.bg_color))
         for b in range(16 * 4):
@@ -46,9 +46,9 @@ class LogoBWidget(QWidget):
         painter.end()
 
 
-class LogoWidget(QWidget):
+class LogoWidgetUp(QWidget):
     def __init__(self, parent=None):
-        super(LogoWidget, self).__init__(parent)
+        super(LogoWidgetUp, self).__init__(parent)
         self.setObjectName("LogoWidget")
         self.bg_color = StyleQss.nav_color
         self.moon_light_color = StyleQss.moon_light_color
@@ -57,7 +57,7 @@ class LogoWidget(QWidget):
         Loader.attrAttach(self)
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
-        super(LogoWidget, self).paintEvent(a0)
+        super(LogoWidgetUp, self).paintEvent(a0)
 
         painter = QPainter()
         # 设置反锯齿
@@ -127,6 +127,6 @@ if __name__ == '__main__':
     from PyQt5.QtWidgets import QWidget, QApplication
 
     app = QApplication(sys.argv)
-    frame = LogoWidget(None)
+    frame = LogoWidgetUp(None)
     frame.show()
     sys.exit(app.exec())

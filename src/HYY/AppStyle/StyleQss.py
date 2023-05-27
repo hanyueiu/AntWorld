@@ -1,9 +1,9 @@
 """
 QWidget#MainFrame{
-    background-color:rgba(255,255,255,255);
+    background-color:rgba(223,223,223,255);
 }
 QWidget#title_widget {
-    background: rgba(223,223,223,255);
+    background: rgba(255,255,255,0);
 }
 
 QLabel#title_text {
@@ -12,7 +12,7 @@ QLabel#title_text {
     color:rgba(63,63,63,255);
     font-size:%(nav_font)spx;
     font-weight: %(font_bold)s;
-    font-family:Microsoft YaHei;
+    font-family:%(font_family)s;
 }
 
 QScrollArea#nav_bar{
@@ -27,32 +27,78 @@ QPushButton#NavPushButton{
     border-radius:0px;
     padding:0px;
     margin:0px;
-    border:%(nav_border)spx solid rgba(150,120,100, %(transparent)s);
+    border:%(nav_border)spx solid rgba(150,120,100, %(opacity)s);
     color:rgba%(nav_font_color)s;
     font-size:%(nav_font)spx;
     font-weight: %(font_bold)s;
-    font-family:Microsoft YaHei;
+    font-family:%(font_family)s;
 }
 QPushButton#NavPushButton:hover {
-    background: rgba(240, 255, 250, %(transparent)s);
+    background: rgba(240, 255, 250, %(opacity)s);
     color:rgba%(nav_font_color)s;
     font-size:%(nav_font)spx;
     font-weight: %(font_bold)s;
-    font-family:Microsoft YaHei;
+    font-family:%(font_family)s;
 }
 QPushButton#NavPushButton:pressed {
-    background: rgba(255, 255, 255, %(transparent)s);
+    background: rgba(255, 255, 255, %(opacity)s);
     color:rgba%(nav_font_color)s;
     font-size:%(nav_font)spx;
     font-weight: %(font_bold)s;
 }
 QPushButton#NavPushButton:focus {
-    background: rgba(255, 255, 255, %(transparent)s);
+    background: rgba(255, 255, 255, %(opacity)s);
     color:rgba%(nav_font_color)s;
-    font-size:%(nav_font)spx;
-    font-weight: %(font_bold)s;
-    font-family:Microsoft YaHei;
+}
 
+QPushButton#NavSubPushButton{
+    padding:0px;
+    margin:0px;
+    background-color: rgba%(white)s;
+    color:rgba(143,143,143,%(opacity)s);
+
+    border: 0px solid white;
+    border-radius:0px;
+
+    font-size: 14px;
+    font-weight: %(font_bold)s;
+    font-family:%(font_family)s;
+}
+QPushButton#NavSubPushButton:focus {
+    border-bottom: 2px solid rgba(0,255,255,%(opacity)s);
+}
+QLineEdit#TaskLineEdit {
+    padding:0px;
+    margin-top:5px;
+    margin-bottom:5px;
+    margin-left:10px;
+
+    background-color: rgba%(white)s;
+    color:rgba(143,143,143,%(opacity)s);
+
+    border: 1px solid red;
+    border-radius:0px;
+
+    font-size: 14px;
+    font-weight: %(font_bold)s;
+    font-family:%(font_family)s;
+}
+
+QPushButton#TaskPushButton {
+    padding:0px;
+    margin:0px;
+    margin-top:2px;
+    margin-bottom:2px;
+    margin-left:10px;
+    background-color: rgba%(white)s;
+    color:rgba(143,143,143,%(opacity)s);
+
+    border: 1px solid red;
+    border-radius:0px;
+
+    font-size: 14px;
+    font-weight: %(font_bold)s;
+    font-family:%(font_family)s;
 }
 
 QPushButton#minimize_btn {
@@ -73,34 +119,23 @@ font_bold = 700  # 加粗字体
 moon_light_color = (255, 255, 204, 200)
 nav_color = (230, 248, 239, 255)
 nav_font_color = (250, 200, 200, 255)
-transparent = 255
+opacity = 1
 nav_border = 0
+font_family = "monospace "
+
 
 QSS = __doc__ % {
     "nav_color": nav_color,
     "nav_border": nav_border,
     "nav_font_color": nav_font_color,
-    "transparent": transparent,
+    "opacity": int(opacity * 255),
     "font_normal": font_normal,
     "moon_light_color": moon_light_color,
     "font_bold": font_bold,
     "nav_font": nav_font,
+    "white": white,
+    "font_family": font_family,
 }
-
-"""
-QLabel#LogoLabel{
-    background:QLinearGradient(
-        spread:pad,
-        x1:0,
-        y1:1,
-        x2:0,
-        y2:0,
-        stop:0 rgba(200, 200, 200, %(transparent)s),
-        stop:0.5 rgba(150, 150, 200,%(transparent)s),
-        stop:1 rgba(150, 200, 200, %(transparent)s)
-    );
-    border-radius:0px;color:white;
-    border:%(nav_border)spx solid rgba(66, 66, 66, %(transparent)s);"""
 
 
 class StyleQss(object):
@@ -108,10 +143,12 @@ class StyleQss(object):
     def get_qss(nav_color=nav_color,
                 nav_border=nav_border,
                 nav_font_color=nav_font_color,
-                transparent=transparent,
+                opacity=int(opacity*255),
                 font_normal=font_normal,
                 moon_light_color=moon_light_color,
                 font_bold=font_bold,
+                white=white,
+                font_family=font_family,
                 qss=__doc__
                 ):
 
@@ -119,11 +156,13 @@ class StyleQss(object):
         param.update(nav_color=nav_color,
                      nav_border=nav_border,
                      nav_font_color=nav_font_color,
-                     transparent=transparent,
+                     opacity=opacity,
                      font_normal=font_normal,
                      moon_light_color=moon_light_color,
                      font_bold=font_bold,
                      nav_font=nav_font,
+                     white=white,
+                     font_family=font_family,
                      )
         return qss % param
 
@@ -133,6 +172,20 @@ class StyleQss(object):
 
 
 if __name__ == '__main__':
+    """
+    QLabel#LogoLabel{
+        background:QLinearGradient(
+            spread:pad,
+            x1:0,
+            y1:1,
+            x2:0,
+            y2:0,
+            stop:0 rgba(200, 200, 200, %(opacity)s),
+            stop:0.5 rgba(150, 150, 200,%(opacity)s),
+            stop:1 rgba(150, 200, 200, %(opacity)s)
+        );
+        border-radius:0px;color:white;
+        border:%(nav_border)spx solid rgba(66, 66, 66, %(opacity)s);"""
     StyleQss().get_qss()
     f = QFont()
     f.setFamily()

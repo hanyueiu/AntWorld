@@ -9,6 +9,9 @@ class DragAlg(object):
     isMaximized = QWidget.isMaximized
     pos = QWidget.pos
 
+    def __init__(self):
+        self.init_param()
+
     def init_param(self):
         self._isTracking = False
         self._startPos = None

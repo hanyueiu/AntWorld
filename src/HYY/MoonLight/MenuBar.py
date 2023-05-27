@@ -1,11 +1,12 @@
 import math
 from PyQt5 import QtGui
-from PyQt5.QtCore import Qt, QLineF, QRect, QPointF
+from PyQt5.QtCore import Qt, QLineF, QRect, QPointF, QSize
 from PyQt5.QtGui import QPainter, QBrush, QColor, QPen, QPolygon, QMouseEvent
 
+from AppStyle.StyleLoader import Loader
 from AppStyle.StyleQss import StyleQss
 from Dandelion import PushButton, Widget, VBoxLayout
-from MoonLight.Logo import LogoWidget
+from MoonLight.Logo import LogoWidgetUp
 from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QFrame
 from Resource import resource_qrc
 
@@ -48,7 +49,7 @@ class IcoButton(Widget):
 
         pen = QPen(Qt.gray, 2, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin)
         painter.setPen(pen)
-        area_m = LogoWidget.get_scale(QRect(0, 0, self.width(), self.height()), 0.1)
+        area_m = LogoWidgetUp.get_scale(QRect(0, 0, self.width(), self.height()), 0.1)
         print(area_m, rx, ry)
         painter.drawArc(area_m, 360 * 16, 360 * 16)
 
@@ -68,8 +69,9 @@ class TitleWidget(QWidget):
         super(TitleWidget, self).__init__(parent)
         self.offset_d = 10
         self.frame = parent
+        self.setMinimumSize(QSize(200, 35))
         self.layout_widget()
-
+        Loader.attrAttach(self)
 
     def layout_widget(self):
         self.title_widget = Widget(self)

@@ -18,5 +18,5 @@ class Loader(object):
         widget.setContentsMargins(0, 0, 0, 0)
 
     @staticmethod
-    def spaceAttach(layout: QtWidgets.QBoxLayout):
-        layout.setSpacing(0)
+    def spaceAttach(layout: QtWidgets.QBoxLayout, interval=0):
+        layout.setSpacing(interval)

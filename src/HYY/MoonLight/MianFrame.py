@@ -7,9 +7,10 @@ from AppAlg.Move import DragAlg
 from AppStyle.StyleLoader import Loader
 from AppStyle.StyleQss import StyleQss
 from Dandelion import Icon, Pixmap
-from MoonLight.LogoWidget import LogoWidget, LogoBWidget
-from MoonLight.NavWidget import NavWidget
-from MoonLight.TitleWidget import TitleWidget
+from MoonLight.DisplayBox import BrowserSimple
+from MoonLight.Logo import LogoWidgetUp, LogoWidgetDown
+from MoonLight.NavBar import NavWidget
+from MoonLight.MenuBar import TitleWidget
 from PyQt5.QtGui import QMouseEvent
 import Resource.resource_qrc
 
@@ -35,7 +36,6 @@ class MainFrame(QWidget, DragAlg):
         Loader.flagDetach(self)
         self.addWidget()
         self.setMouseTracking(True)
-        self.init_param()
 
     def setSize(self, size=None):
         if not size:
@@ -48,27 +48,21 @@ class MainFrame(QWidget, DragAlg):
             self.setSize(*size)
 
     def addWidget(self):
-        self.logo = LogoWidget(self)
-        self.nav = NavWidget(self)
-        self.logo_b = LogoBWidget(self)
-        self.up_bar = TitleWidget(self)
-        self.show_widget = QWidget(self)
-        self.show_widget.setStyleSheet("background:rgb(203,210,200)")
+        self.logo = LogoWidgetUp(self)
+        self.navBar = NavWidget(self)
+        self.logo_bottom = LogoWidgetDown(self)
+        self.MenuBar = TitleWidget(self)
+        self.browserFrame = BrowserSimple(self)
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
         width = self.width()
         height = self.height()
 
         self.logo.setGeometry(QRect(0, 0, self.setInt(width, 0.15), self.setInt(width, 0.15) - 1))
-        self.nav.setGeometry(
-            QRect(0, self.setInt(width, 0.15), self.setInt(width, 0.15), height - self.setInt(width, 0.3)))
-        self.logo_b.setGeometry(
-            QRect(0, height - self.setInt(width, 0.15), self.setInt(width, 0.15), self.setInt(width, 0.15)))
-        self.up_bar.setGeometry(
-            QRect(self.setInt(width, 0.15), 0, self.setInt(width, 0.85) + 1, self.setInt(height, 0.05)))
-        self.show_widget.setGeometry(
-            QRect(self.setInt(width, 0.15), self.setInt(height, 0.05), self.setInt(width, 0.85) + 1,
-                  self.setInt(height, 0.85)))
+        self.navBar.setGeometry(QRect(0, self.setInt(width, 0.15), self.setInt(width, 0.15), height - self.setInt(width, 0.3)))
+        self.logo_bottom.setGeometry(QRect(0, height - self.setInt(width, 0.15), self.setInt(width, 0.15), self.setInt(width, 0.15)))
+        self.MenuBar.setGeometry(QRect(self.setInt(width, 0.15), 0, self.setInt(width, 0.85) + 1, self.setInt(height, 0.05)))
+        self.browserFrame.setGeometry(QRect(self.setInt(width, 0.15), self.setInt(height, 0.05), self.setInt(width, 0.85) + 1, self.setInt(height, 0.95)))
 
     def setInt(self, length, ratio):
         return int(length * ratio)
