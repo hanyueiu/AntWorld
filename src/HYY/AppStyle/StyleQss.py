@@ -5,7 +5,9 @@ QWidget#MainFrame{
 QWidget#title_widget {
     background: rgba(255,255,255,0);
 }
-
+QWidget#YYHWidget{
+    background: rgba(255,255,255,0);
+}
 QLabel#title_text {
     padding:0px;
     margin:0px;
@@ -67,16 +69,15 @@ QPushButton#NavSubPushButton{
 QPushButton#NavSubPushButton:focus {
     border-bottom: 2px solid rgba(0,255,255,%(opacity)s);
 }
+
 QLineEdit#TaskLineEdit {
     padding:0px;
-    margin-top:5px;
-    margin-bottom:5px;
-    margin-left:10px;
+    margin:5px 5px 5px 5px;
 
     background-color: rgba%(white)s;
     color:rgba(143,143,143,%(opacity)s);
 
-    border: 1px solid red;
+    border: 1px solid grey;
     border-radius:0px;
 
     font-size: 14px;
@@ -86,20 +87,18 @@ QLineEdit#TaskLineEdit {
 
 QPushButton#TaskPushButton {
     padding:0px;
-    margin:0px;
-    margin-top:2px;
-    margin-bottom:2px;
-    margin-left:10px;
+    margin:5px 5px 5px 5px;
     background-color: rgba%(white)s;
     color:rgba(143,143,143,%(opacity)s);
 
-    border: 1px solid red;
+    border: 1px solid grey;
     border-radius:0px;
 
     font-size: 14px;
     font-weight: %(font_bold)s;
     font-family:%(font_family)s;
 }
+
 
 QPushButton#minimize_btn {
     border-image: url(:/images/minimize.png) no-repeat 0px 0px;

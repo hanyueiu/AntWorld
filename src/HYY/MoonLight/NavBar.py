@@ -39,7 +39,7 @@ class NavWidget(QWidget):
 
     def layout_scroll(self):
 
-        item_list = ["视频", "音频", "YYH"] * 1
+        item_list = ["YYH", "视频", "音频"] * 1
         self.item_height = 42
         self.item_border = 0
         self.color = QColor(121, 44, 121, 255)

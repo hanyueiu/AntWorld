@@ -25,6 +25,7 @@ class IcoButton(Widget):
         painter.setPen(pen)
         line = QLineF(self.width() * 0.1, self.height() / 2, self.width() * 0.8, self.height() / 2)
         painter.drawLine(line)
+
     def close_ico(self, painter: QPainter):
         pass
 
