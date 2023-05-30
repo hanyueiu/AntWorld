@@ -21,10 +21,15 @@ class TaskWidget(QWidget):
         self.task_list = task_list
         self.setTaskPushButton(self.task_list)
         self.setStyleSheet(StyleQss.get_qss())
+        # 隐藏窗口
         Loader.attrAttach(self)
 
     def setTaskPushButton(self, task_list):
         self.layout_bar = QHBoxLayout()
+        Loader.spaceAttach(self.layout_bar)
+        Loader.boundAttach(self.layout_bar)
+        self.setLayout(self.layout_bar)
+
         for index, task_dict in enumerate(task_list):
             task_type = task_dict.get("type", None)
             task_name = task_dict.get("name", '')
@@ -43,15 +48,11 @@ class TaskWidget(QWidget):
             elif task_type is QLabel:
                 item = QLabel(self)
                 item.setText(str(task_name))
+                Loader.attrAttach(item)
             else:
                 continue
             self.layout_bar.addWidget(item)
             item.setObjectName(object_name)
-
-        Loader.spaceAttach(self.layout_bar)
-        Loader.boundAttach(self.layout_bar)
-
-        self.setLayout(self.layout_bar)
 
     def handle_data(self, args):
         salts = args[2]
@@ -77,9 +78,9 @@ class TaskWidget(QWidget):
                 second_encode_data = sl.get_file_data(second_path)
             rl_salt = sl.check_data_salt(second_encode_data, salt)
             if rl_salt:
-                self.task_handle_label("Second Path 数据已获取")
+                self.task_handle_label("Append Path 数据已获取")
             else:
-                self.task_handle_label("Second path salt not match")
+                self.task_handle_label("Append Path and Salt do not match")
                 return None
         if os.path.exists(args[0]):
             first_path = os.path.abspath(args[0])
@@ -91,9 +92,9 @@ class TaskWidget(QWidget):
                     first_encode_data = sl.get_file_data(first_path)
                 rl_salt = sl.check_data_salt(first_encode_data, salt)
                 if rl_salt:
-                    self.task_handle_label("First数据已获取")
+                    self.task_handle_label("The Ontology Data has been obtained")
                 else:
-                    self.task_handle_label("First path salt not match")
+                    self.task_handle_label("Ontology Data and Salt do not match")
                     return None
                 first_encode_data = sl.map_data([first_encode_data, second_encode_data]) if second_encode_data else first_encode_data
                 dir_name, base_name = os.path.dirname(first_path), os.path.basename(first_path)
@@ -139,7 +140,7 @@ class TaskWidget(QWidget):
             elif item_args == -1:
                 bt_index = item_index
                 widget.setEnabled(False)
-                self.task_handle_label("进行中...")
+                self.task_handle_label("......")
             else:
                 continue
         func = self.task_list[bt_index]["handle"]
@@ -148,7 +149,7 @@ class TaskWidget(QWidget):
         try:
             data = self.handle_data(args)
         except Exception as err:
-            self.task_handle_label("处理失败")
+            self.task_handle_label("Fail")
         finally:
             button.setEnabled(True)
 

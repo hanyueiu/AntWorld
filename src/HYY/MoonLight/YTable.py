@@ -17,9 +17,12 @@ class YTableWidget(QWidget):
 
     def initLayout(self):
         self.vLayout = QVBoxLayout()
-        self.setLayout(self.vLayout)
         self.tableWidget = QTableWidget(self)
+        self.tableWidget.setObjectName("TaskTableWidget")
         self.vLayout.addWidget(self.tableWidget)
+        Loader.spaceAttach(self.vLayout)
+        Loader.boundAttach(self.vLayout)
+        self.setLayout(self.vLayout)
 
         # 允许右键产生菜单
         self.tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -45,7 +48,6 @@ class YTableWidget(QWidget):
         import random
         # count = random.choice(list(range(30)))
         # data = [[(i, j) for j in range(3)] for i in range(count)]
-
         rows, cols = len(data), 3
         self.tableWidget.setRowCount(rows)
         self.tableWidget.setColumnCount(cols)
@@ -58,8 +60,13 @@ class YTableWidget(QWidget):
         for row in range(rows):
             for col in range(cols):
                 new_item = QTableWidgetItem(str(data[row][col]))
+                new_item.setFlags(Qt.ItemIsEnabled)
                 self.tableWidget.setItem(row, col, new_item)
         self.tableWidget.viewport().update()
+
+    def mousePressEvent(self, a0: QtGui.QMouseEvent) -> None:
+        super(YTableWidget, self).mousePressEvent(a0)
+        print(a0)
 
 
 if __name__ == "__main__":

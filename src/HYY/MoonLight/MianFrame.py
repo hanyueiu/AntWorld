@@ -7,7 +7,7 @@ from AppAlg.Move import DragAlg
 from AppStyle.StyleLoader import Loader
 from AppStyle.StyleQss import StyleQss
 from Dandelion import Icon, Pixmap
-from MoonLight.DisplayBox import BrowserSimple
+from MoonLight.DisplayBox import BrowserWidget
 from MoonLight.Logo import LogoWidgetUp, LogoWidgetDown
 from MoonLight.NavBar import NavWidget
 from MoonLight.MenuBar import TitleWidget
@@ -32,7 +32,7 @@ class MainFrame(QWidget, DragAlg):
         self.setStyleSheet(StyleQss.get_qss())
         self.setSize()
         # Loader.attrAttach(self)
-        Loader.boundAttach(self)
+        # Loader.boundAttach(self)
         Loader.flagDetach(self)
         self.addWidget()
         self.setMouseTracking(True)
@@ -52,7 +52,7 @@ class MainFrame(QWidget, DragAlg):
         self.navBar = NavWidget(self)
         self.logo_bottom = LogoWidgetDown(self)
         self.MenuBar = TitleWidget(self)
-        self.browserFrame = BrowserSimple(self)
+        self.browserFrame = BrowserWidget(self)
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
         width = self.width()
@@ -62,7 +62,7 @@ class MainFrame(QWidget, DragAlg):
         self.navBar.setGeometry(QRect(0, self.setInt(width, 0.15), self.setInt(width, 0.15), height - self.setInt(width, 0.3)))
         self.logo_bottom.setGeometry(QRect(0, height - self.setInt(width, 0.15), self.setInt(width, 0.15), self.setInt(width, 0.15)))
         self.MenuBar.setGeometry(QRect(self.setInt(width, 0.15), 0, self.setInt(width, 0.85) + 1, self.setInt(height, 0.05)))
-        self.browserFrame.setGeometry(QRect(self.setInt(width, 0.15), self.setInt(height, 0.05), self.setInt(width, 0.85) + 1, self.setInt(height, 0.95)))
+        self.browserFrame.setGeometry(QRect(self.setInt(width, 0.15), self.setInt(height, 0.06), self.setInt(width, 0.85) + 1, self.setInt(height, 0.94)))
 
     def setInt(self, length, ratio):
         return int(length * ratio)

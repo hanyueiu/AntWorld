@@ -1,12 +1,18 @@
 """
 QWidget#MainFrame{
-    background-color:rgba(223,223,223,255);
+    background-color:rgba(200,200,200,255);
 }
+
+
+MenuPage{}
 QWidget#title_widget {
     background: rgba(255,255,255,0);
 }
-QWidget#YYHWidget{
-    background: rgba(255,255,255,0);
+QPushButton#minimize_btn {
+    border-image: url(:/images/minimize.png) no-repeat 0px 0px;
+}
+QPushButton#close_btn {
+    border-image: url(:/images/close.png) no-repeat 0px 0px;
 }
 QLabel#title_text {
     padding:0px;
@@ -17,13 +23,14 @@ QLabel#title_text {
     font-family:%(font_family)s;
 }
 
+
+navPage{}
 QScrollArea#nav_bar{
     border-radius: 0px;
     border: 0px solid ;
     border-color: rgba(255,255,255,255);
     background-color:rgba%(nav_color)s;
 }
-
 QPushButton#NavPushButton{
     background-color: rgba%(nav_color)s;
     border-radius:0px;
@@ -53,6 +60,8 @@ QPushButton#NavPushButton:focus {
     color:rgba%(nav_font_color)s;
 }
 
+
+NavSubPage{}
 QPushButton#NavSubPushButton{
     padding:0px;
     margin:0px;
@@ -70,6 +79,19 @@ QPushButton#NavSubPushButton:focus {
     border-bottom: 2px solid rgba(0,255,255,%(opacity)s);
 }
 
+
+TaskPage{}
+QStackedWidget#TaskStackedWidget{
+    margin:0px;
+    padding:0px;
+    background: rgba(215,200,200,0);
+}
+QTableWidget#TaskTableWidget{
+    border:0px;
+    margin:0px;
+    padding:0px;
+    background:rgba(255, 255, 255, %(opacity)s);
+}
 QLineEdit#TaskLineEdit {
     padding:0px;
     margin:5px 5px 5px 5px;
@@ -84,7 +106,6 @@ QLineEdit#TaskLineEdit {
     font-weight: %(font_bold)s;
     font-family:%(font_family)s;
 }
-
 QPushButton#TaskPushButton {
     padding:0px;
     margin:5px 5px 5px 5px;
@@ -98,15 +119,9 @@ QPushButton#TaskPushButton {
     font-weight: %(font_bold)s;
     font-family:%(font_family)s;
 }
-
-
-QPushButton#minimize_btn {
-    border-image: url(:/images/minimize.png) no-repeat 0px 0px;
+QLineEdit#TaskLineEdit{
+    background:white;
 }
-QPushButton#close_btn {
-    border-image: url(:/images/close.png) no-repeat 0px 0px;
-}
-
 """
 from PyQt5.QtGui import QFont
 

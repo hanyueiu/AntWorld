@@ -12,7 +12,7 @@ InfoBox 右上基本信息展示，右下状态信息展示
 """
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QWidget, QStackedWidget, QVBoxLayout, QPushButton, QHBoxLayout, QLabel, QGridLayout, \
-    QApplication, QLineEdit
+    QApplication, QLineEdit, QFrame
 
 from AppStyle.StyleLoader import Loader
 import Resource.resource_qrc
@@ -21,16 +21,19 @@ from MoonLight.TaskBar import TaskWidget
 from MoonLight.YTable import YTableWidget
 
 
-class BrowserSimple(QWidget):
+class BrowserWidget(QWidget):
 
     def __init__(self, parent=None):
-        super(BrowserSimple, self).__init__(parent)
+        super(BrowserWidget, self).__init__(parent)
+        self.setObjectName("BrowserWidget")
+        self.root_parent = parent
         self.initLayout()
 
     def initLayout(self):
         self.stackedWidget = QStackedWidget(self)
+        self.stackedWidget.setObjectName("TaskStackedWidget")
         Loader.attrAttach(self.stackedWidget)
-        # Loader.attrAttach(self)
+        # Loader.boundAttach(self.stackedWidget)
         layout = QVBoxLayout()
         layout.addWidget(self.stackedWidget)
         self.setLayout(layout)
@@ -41,29 +44,30 @@ class BrowserSimple(QWidget):
 
     def create_page(self, widgets_scale):
         stackPage = YYHWidget(widgets_scale)
+        Loader.attrAttach(stackPage)
         self.stackedWidget.addWidget(stackPage)
+
 
 
 class YYHWidget(QWidget):
     def __init__(self, widgets_scale, parent=None):
         super(YYHWidget, self).__init__(parent)
+        self.root_parent = parent
         self.widgets_scale = widgets_scale
+        Loader.attrAttach(self)
         self.setObjectName("YYHWidget")
         self.initLayout()
 
     def initLayout(self, ):
         self.showWidget = YTableWidget(self)
+        self.showWidget.tableWidget.installEventFilter(self.root_parent)
+
         task_list = [
-            {"name": "Ontology Path", "type": QLineEdit, "handle": lambda x: print(x), "width": 200,
-             "ObjectName": "TaskLineEdit", "args": 1},
-            {"name": "Append Path", "type": QLineEdit, "handle": lambda x: print(x), "width": 200,
-             "ObjectName": "TaskLineEdit", "args": 1},
-            {"name": "Salt", "type": QLineEdit, "handle": lambda x: print(x), "width": 100,
-             "ObjectName": "TaskLineEdit", "args": 1},
-            {"name": "GO", "type": QPushButton, "handle": self.showWidget.update_data, "width": 100,
-             "ObjectName": "TaskPushButton", "args": -1},
-            {"name": "...", "type": QLabel, "handle": lambda x: print(x), "width": 200, "ObjectName": "tipWidget",
-             "args": 0},
+            {"name": "Ontology Path", "type": QLineEdit, "handle": lambda x: print(x), "width": 200, "ObjectName": "TaskLineEdit", "args": 1},
+            {"name": "Append Path", "type": QLineEdit, "handle": lambda x: print(x), "width": 200, "ObjectName": "TaskLineEdit", "args": 1},
+            {"name": "Salt", "type": QLineEdit, "handle": lambda x: print(x), "width": 100, "ObjectName": "TaskLineEdit", "args": 1},
+            {"name": "GO", "type": QPushButton, "handle": self.showWidget.update_data, "width": 100, "ObjectName": "TaskPushButton", "args": -1},
+            {"name": "...", "type": QLabel, "handle": lambda x: print(x), "width": 200, "ObjectName": "tipWidget", "args": 0},
         ]
         self.buttonList = TaskWidget(task_list, self)
 
@@ -74,18 +78,10 @@ class YYHWidget(QWidget):
         self.buttonList.setGeometry(0, int(height * 0.92), self.buttonList.width_calc, int(height * 0.08))
 
 
-class BrowserWidget(QWidget):
-    def __init__(self, widgets_scale, parent=None):
-        super(BrowserWidget, self).__init__(parent)
-        self.widgets_scale = widgets_scale
-        self.setObjectName("YYHWidget")
-        self.initLayout()
-
-
 if __name__ == '__main__':
     import sys
 
     app = QApplication(sys.argv)
-    demo = BrowserSimple()
+    demo = BrowserWidget()
     demo.show()
     sys.exit(app.exec_())
