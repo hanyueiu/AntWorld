@@ -23,7 +23,7 @@ def to_import(string):
             globals().update({class_name: class_object})
 
 
-def append_path(cur_path=os.path.abspath(__file__), root_name="QPet"):
+def append_path(cur_path=os.path.abspath(__file__), root_name="HPet"):
     # HHY 在__init__中进行调用， 可以达到导入代码不变的目的， 但在pycharm文件中导入代码会显示无法导入的红色波浪线，且没有代码提示
     cur_list = []
     dir_path = os.path.dirname(cur_path)
@@ -36,4 +36,6 @@ def append_path(cur_path=os.path.abspath(__file__), root_name="QPet"):
     else:
         return
 
-to_import(__doc__)
+
+if __name__ == '__main__':
+    to_import(__doc__)

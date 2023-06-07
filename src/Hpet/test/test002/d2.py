@@ -17,7 +17,7 @@ class TMainFrame(QWidget):
     def __init__(self, parent):
         super(TMainFrame, self).__init__(parent)
         # YYH 将图片以源码形式保存，展示于窗口， 任务栏
-        self.img_001 = ':/images/img002.png'
+        self.img_001 = ':/Images/img002.png'
         # self.setObjectName("mainframe")
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
@@ -25,7 +25,7 @@ class TMainFrame(QWidget):
         print(self.testAttribute(Qt.WA_TranslucentBackground))
         self.setStyleSheet(Qss)
         self.under_color = (0, 0, 0, 0)
-        self.image_fill = ImageQt.fromqimage(QImage(":/images/img003.png"))
+        self.image_fill = ImageQt.fromqimage(QImage(":/Images/img003.png"))
         self.progress_val = 0
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
